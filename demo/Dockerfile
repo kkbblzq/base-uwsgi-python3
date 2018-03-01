@@ -1,4 +1,4 @@
-FROM lzq/base-uwsgi-python3:0.1
+FROM kkbblzq/base-uwsgi-python3:0.1
 
 LABEL maintainer="lzq <crlzq@vip.qq.com>"
 
