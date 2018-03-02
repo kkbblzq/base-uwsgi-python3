@@ -12,7 +12,7 @@ supervisor
 * [Demo](./demo/)  
 
 ```
-FROM lzq/base-uwsgi-python3:0.1
+FROM kkbblzq/base-uwsgi-python3:0.1
 
 # 复制应用的nginx配置
 COPY demo_app.conf /etc/nginx/conf.d/demo_app.conf
