@@ -1,6 +1,16 @@
-FROM hub.dianchu.cc/library/python:3-alpine
+FROM python:3-alpine3.6
 
 LABEL maintainer="lzq <crlzq@vip.qq.com>"
+
+# 更换系统软件源
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
+# 设置pip镜像
+RUN mkdir -p ~/.pip && echo -e "[global]\ntimeout = 6000\nindex-url = https://pypi.doubanio.com/simple\n[install]\nuse-mirrors = true\nmirrors = https://pypi.doubanio.com/simple\ntrusted-host = pypi.doubanio.com" > ~/.pip/pip.conf
+
+# 时区设置
+RUN apk add --no-cache tzdata ca-certificates
+ENV TZ Asia/Shanghai
 
 # 安装uwsgi基础编译环境
 RUN apk add --no-cache gcc g++ make
