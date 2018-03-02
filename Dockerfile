@@ -12,8 +12,8 @@ RUN mkdir -p ~/.pip && echo -e "[global]\ntimeout = 6000\nindex-url = https://py
 RUN apk add --no-cache tzdata ca-certificates
 ENV TZ Asia/Shanghai
 
-# 安装uwsgi基础编译环境
-RUN apk add --no-cache gcc g++ make
+# 安装基础环境
+RUN apk add --no-cache gcc g++ make libc-dev mariadb-dev postgresql-dev python-dev
 
 # 安装uwsgi
 RUN apk add --no-cache --virtual .build-deps linux-headers && \
