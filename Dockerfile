@@ -13,7 +13,7 @@ RUN apk add --no-cache tzdata ca-certificates
 ENV TZ Asia/Shanghai
 
 # 安装基础环境
-RUN apk add --no-cache gcc g++ make libc-dev mariadb-dev postgresql-dev python-dev
+RUN apk add --no-cache gcc g++ make libc-dev mariadb-dev postgresql-dev python-dev pcre-dev jpeg-dev
 
 # 安装uwsgi
 RUN apk add --no-cache --virtual .build-deps linux-headers && \
