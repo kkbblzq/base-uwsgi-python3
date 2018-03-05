@@ -29,9 +29,6 @@ RUN apk add --no-cache nginx
 # 复制nginx基础配置
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# 设置nginx前台运行
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-
 # 安装supervisor
 RUN apk add --no-cache supervisor
 
