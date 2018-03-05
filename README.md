@@ -33,7 +33,8 @@ CMD ["/usr/bin/supervisord"]
 ```
 
 ### 注1 nginx配置
-需要对应用编写一个nginx的vhost配置
+需要对应用编写一个nginx的vhost配置拷贝到/etc/nginx/conf.d/目录下
+
 
 例
 
@@ -48,6 +49,8 @@ server {
     }
 }
 ```
+
+**当然你也可以直接覆盖完整nginx配置**
 
 ### 注2 基础配置路径(可以自行覆盖)
 
