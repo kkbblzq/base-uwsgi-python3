@@ -6,11 +6,12 @@ ENV PYPY_VERSION 5.10.1
 
 ENV PYTHON_PIP_VERSION 9.0.1
 
+ENV PATH /usr/local/bin:$PATH
 # 更换系统软件源
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 时区设置
-RUN apk add --no-cache tzdata ca-certificates curl
+RUN apk add --no-cache tzdata ca-certificates libressl
 ENV TZ Asia/Shanghai
 
 RUN curl -o pypy.tar.bz2 "https://bitbucket.org/pypy/pypy/downloads/pypy3-v${PYPY_VERSION}-linux64.tar.bz2" && \
