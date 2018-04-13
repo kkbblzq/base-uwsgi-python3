@@ -2,20 +2,24 @@ FROM alpine:3.6
 
 LABEL maintainer="lzq <crlzq@vip.qq.com>"
 
-# 更换系统软件源
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
-
 ENV PYPY_VERSION 5.10.1
 
 ENV PYTHON_PIP_VERSION 9.0.1
 
-RUN wget --no-check-certificate -O pypy.tar.bz2 "https://bitbucket.org/pypy/pypy/downloads/pypy3-v${PYPY_VERSION}-linux64.tar.bz2" && \
+# 更换系统软件源
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
+# 时区设置
+RUN apk add --no-cache tzdata ca-certificates curl
+ENV TZ Asia/Shanghai
+
+RUN curl -o pypy.tar.bz2 "https://bitbucket.org/pypy/pypy/downloads/pypy3-v${PYPY_VERSION}-linux64.tar.bz2" && \
     tar -xjC /usr/local --strip-components=1 -f pypy.tar.bz2 && \
     rm pypy.tar.bz2 && \
     pypy3 --version
 
 RUN set -ex; \
-    wget --no-check-certificate -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' && \
+    curl -o get-pip.py 'https://bootstrap.pypa.io/get-pip.py' && \
     pypy3 get-pip.py --disable-pip-version-check --no-cache-dir "pip==$PYTHON_PIP_VERSION" && \
     pip --version && \
     rm -f get-pip.py
@@ -23,9 +27,7 @@ RUN set -ex; \
 # 设置pip镜像
 RUN mkdir -p ~/.pip && echo -e "[global]\ntimeout = 6000\nindex-url = https://pypi.doubanio.com/simple\n[install]\nuse-mirrors = true\nmirrors = https://pypi.doubanio.com/simple\ntrusted-host = pypi.doubanio.com" > ~/.pip/pip.conf
 
-# 时区设置
-RUN apk add --no-cache tzdata ca-certificates
-ENV TZ Asia/Shanghai
+
 
 # 安装基础环境
 RUN apk add --no-cache gcc g++ make libc-dev mariadb-dev postgresql-dev python-dev pcre-dev jpeg-dev
