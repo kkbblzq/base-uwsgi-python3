@@ -14,13 +14,13 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 RUN apk add --no-cache tzdata ca-certificates libressl
 ENV TZ Asia/Shanghai
 
-RUN curl -o pypy.tar.bz2 "https://bitbucket.org/pypy/pypy/downloads/pypy3-v${PYPY_VERSION}-linux64.tar.bz2" && \
+RUN wget -O pypy.tar.bz2 "https://bitbucket.org/pypy/pypy/downloads/pypy3-v${PYPY_VERSION}-linux64.tar.bz2" && \
     tar -xjC /usr/local --strip-components=1 -f pypy.tar.bz2 && \
     rm pypy.tar.bz2 && \
     pypy3 --version
 
 RUN set -ex; \
-    curl -o get-pip.py 'https://bootstrap.pypa.io/get-pip.py' && \
+    wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' && \
     pypy3 get-pip.py --disable-pip-version-check --no-cache-dir "pip==$PYTHON_PIP_VERSION" && \
     pip --version && \
     rm -f get-pip.py
