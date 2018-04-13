@@ -9,13 +9,13 @@ ENV PYPY_VERSION 5.10.1
 
 ENV PYTHON_PIP_VERSION 9.0.1
 
-RUN wget -O pypy.tar.bz2 "https://bitbucket.org/pypy/pypy/downloads/pypy3-v${PYPY_VERSION}-linux64.tar.bz2" && \
+RUN wget --no-check-certificate -O pypy.tar.bz2 "https://bitbucket.org/pypy/pypy/downloads/pypy3-v${PYPY_VERSION}-linux64.tar.bz2" && \
     tar -xjC /usr/local --strip-components=1 -f pypy.tar.bz2 && \
     rm pypy.tar.bz2 && \
     pypy3 --version
 
 RUN set -ex; \
-    wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' && \
+    wget --no-check-certificate -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' && \
     pypy3 get-pip.py --disable-pip-version-check --no-cache-dir "pip==$PYTHON_PIP_VERSION" && \
     pip --version && \
     rm -f get-pip.py
