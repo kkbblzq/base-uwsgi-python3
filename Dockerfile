@@ -13,9 +13,6 @@ RUN apt-get update && \
     apt-get install -y tzdata ca-certificates gcc g++ make libc-dev libpq-dev python-dev libpcre3 libpcre3-dev libjpeg-dev build-essential nginx supervisor
 ENV TZ Asia/Shanghai
 
-# 设置pip镜像
-RUN mkdir -p ~/.pip && echo -e "[global]\ntimeout = 6000\nindex-url = https://pypi.doubanio.com/simple\n[install]\nuse-mirrors = true\nmirrors = https://pypi.doubanio.com/simple\ntrusted-host = pypi.doubanio.com" > ~/.pip/pip.conf
-
 # 安装uwsgi
 RUN pip install uwsgi
 
