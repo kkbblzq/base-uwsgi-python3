@@ -10,7 +10,7 @@ ENV PATH /usr/local/bin:$PATH
 
 # 时区设置
 RUN apt-get update && \
-    apt-get install tzdata ca-certificates gcc g++ make libc-dev mariadb-dev postgresql-dev python-dev pcre-dev jpeg-dev nginx supervisor
+    apt-get install tzdata ca-certificates gcc g++ make libc-dev mariadb-dev postgresql-dev python-dev pcre-dev jpeg-dev build-essential nginx supervisor
 ENV TZ Asia/Shanghai
 
 # 设置pip镜像
@@ -20,13 +20,10 @@ RUN mkdir -p ~/.pip && echo -e "[global]\ntimeout = 6000\nindex-url = https://py
 RUN pip install uwsgi
 
 # 复制基础uwsgi配置
-COPY uwsgi.ini /etc/uwsgi/uwsgi.ini
-
-# 安装nginx
-RUN apt-get install 
+COPY uwsgi.ini /etc/uwsgi/uwsgi.ini 
 
 # 复制nginx基础配置
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # 配置supervisor
-COPY supervisord.ini /etc/supervisor.d/supervisord.ini
+COPY app.conf /etc/supervisor/conf.d/
