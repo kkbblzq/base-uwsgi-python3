@@ -16,7 +16,7 @@ ENV TZ Asia/Shanghai
 # 安装uwsgi
 RUN git clone https://github.com/unbit/uwsgi && \
     cd uwsgi && \
-    pypy setup.py install && \
+    pypy3 setup.py install && \
     cd .. && \
     rm -rf uwsgi
 
