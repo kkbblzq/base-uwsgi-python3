@@ -1,4 +1,4 @@
-FROM pypy:3-slim
+FROM pypy:2-slim
 
 LABEL maintainer="lzq <crlzq@vip.qq.com>"
 
@@ -14,12 +14,7 @@ RUN apt-get update && \
 ENV TZ Asia/Shanghai
 
 # 安装uwsgi
-RUN git clone https://github.com/unbit/uwsgi && \
-    cd uwsgi && \
-    pypy3 setup.py install && \
-    cd .. && \
-    rm -rf uwsgi
-
+RUN pip install uwsgi
 
 # 复制基础uwsgi配置
 COPY uwsgi.ini /etc/uwsgi/uwsgi.ini 
