@@ -10,7 +10,7 @@ ENV PATH /usr/local/bin:$PATH
 
 # 时区设置
 RUN apt-get update && \
-    apt-get install -y tzdata ca-certificates gcc g++ make libc-dev mariadb-dev postgresql-dev python-dev pcre-dev jpeg-dev build-essential nginx supervisor
+    apt-get install -y tzdata ca-certificates gcc g++ make libc-dev libpq-dev python-dev libpcre3 libpcre3-dev libjpeg-dev build-essential nginx supervisor
 ENV TZ Asia/Shanghai
 
 # 设置pip镜像
