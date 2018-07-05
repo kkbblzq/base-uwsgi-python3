@@ -10,11 +10,11 @@ RUN mkdir -p ~/.pip && echo -e "[global]\ntimeout = 6000\nindex-url = https://py
 
 # 时区设置
 RUN apt-get update && \
-    apt-get install -y tzdata ca-certificates gcc g++ make libc-dev libpq-dev python-dev libpcre3 libpcre3-dev libjpeg-dev libffi-dev build-essential nginx supervisor git
+    apk add --no-cache tzdata ca-certificates
 ENV TZ Asia/Shanghai
 
 # 安装基础环境
-RUN apk add --no-cache gcc g++ make libc-dev mariadb-dev postgresql-dev python-dev pcre-dev jpeg-dev
+RUN apk add --no-cache gcc g++ make libc-dev mariadb-dev postgresql-dev python-dev pcre-dev jpeg-dev libffi-dev
 
 # 安装uwsgi
 RUN apk add --no-cache --virtual .build-deps linux-headers && \
