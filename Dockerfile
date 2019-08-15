@@ -34,3 +34,6 @@ RUN apk add --no-cache supervisor
 
 # 配置supervisor
 COPY supervisord.ini /etc/supervisor.d/supervisord.ini
+
+# 安装pandas
+RUN pip install pandas
